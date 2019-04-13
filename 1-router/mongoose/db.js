@@ -1,20 +1,9 @@
-var mongoose = require('mongoose')
-mongoose.connect('http://localhost:27017', {useNewUrlParser:true})
-mongoose.Promise = global.Promise
+const mongoose      = require('mongoose');
+const mongoDB       = 'mongodb://127.0.0.1:27017'
+mongoose.connect(mongoDB);
+mongoose.Promise    = global.Promise;
 
-const db = mongoose.connection
-
-db.once('open', () => {
-    console.log('Connected!')
-})
-
-db.on('error', () => {
-    console.log('Connection failed!')
-    mongoose.disconnect()
-})
-
-db.on('close', () => {
-    console.log('Disconnect')
-})
+const db            = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB 连接错误：'));
 
 module.exports = db;

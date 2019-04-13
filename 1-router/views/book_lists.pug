@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h2= title
+
+    ul
+        each book in book_list
+            li
+                a(href=book.url) #{book.title}
+                | (#{book.isbn})
+        else
+            li There are no books.

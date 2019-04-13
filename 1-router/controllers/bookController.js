@@ -7,8 +7,12 @@ exports.index = (req, res) => {
 };
 
 // 显示完整的藏书列表
-exports.book_list = (req, res) => {
-    res.send('未实现：藏书列表');
+exports.book_list = (req, res, next) => {
+    Book.find({}, 'title isbn')
+        .exec((err, list_books) => {
+            if(err) { return next(err) }
+            res.render('book_lists', {title: 'Book Lists', book_list: list_books})
+        })
 };
 
 // 为每种藏书显示详细信息的页面
